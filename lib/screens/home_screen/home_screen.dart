@@ -15,22 +15,64 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isFirst = true, pageMounted = false;
-  late DatabaseReference _deviceRef;
-  late StreamSubscription<DatabaseEvent> _deviceSubscription;
+  late DatabaseReference _deviceRef,_userref;
+  late StreamSubscription<DatabaseEvent> _deviceSubscription,_userSubscription;
 
   bool status = false;
   String text = "";
 
+  bool car1=false,car2=false,car3=false,car4=false;
+  bool car1noti=false,car2noti=false,car3noti=false,car4noti=false;
+
+
   Future<void> initSync() async {
-    _deviceRef = FirebaseDatabase.instance.ref('device');
+    _deviceRef = FirebaseDatabase.instance.ref('parking');
+    _userref = FirebaseDatabase.instance.ref('notification');
 
     _deviceSubscription = _deviceRef.onValue.listen((DatabaseEvent event) {
       print("Value:${event.snapshot.value}");
       try {
         Map<String, dynamic> map = Map.castFrom(event.snapshot.value as Map);
-        text = map['data'] ?? "";
-        status = (map['status'] ?? "") == "on" ? true : false;
-        if(pageMounted) setState(() {});
+        text = map.toString();
+
+        car1=map["car1"].toString()=="on"?true:false;
+        car2=map["car2"].toString()=="on"?true:false;
+        car3=map["car3"].toString()=="on"?true:false;
+        car4=map["car4"].toString()=="on"?true:false;
+
+
+        if(pageMounted) {setState(() {});}
+        else {
+          Future.delayed(Duration(milliseconds: 100), () {
+            setState(() {
+            });
+          });
+        }
+      }
+      catch(e) {
+
+      }
+    });
+
+    _userSubscription = _userref.onValue.listen((DatabaseEvent event) {
+      print("Value:${event.snapshot.value}");
+      try {
+        Map<String, dynamic> map = Map.castFrom(event.snapshot.value as Map);
+        text = map.toString();
+
+        car1noti=map["car1"].toString()=="on"?true:false;
+        car2noti=map["car2"].toString()=="on"?true:false;
+        car3noti=map["car3"].toString()=="on"?true:false;
+        car4noti=map["car4"].toString()=="on"?true:false;
+
+
+        if(pageMounted) { setState(() {}); }
+        else {
+          Future.delayed(Duration(milliseconds: 100), () {
+            setState(() {
+            });
+          });
+        }
       }
       catch(e) {
 
@@ -62,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Styles.background,
           body: Column(
             children: [
-              MyAppBar(title: "Virtual Keyboard", backbtnVisible: false, color: Colors.white,),
+              MyAppBar(title: "Smart Parking", backbtnVisible: false, color: Colors.white,),
               Expanded(
                 child: getMainBody(),
               ),
@@ -77,46 +119,63 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: MySize.size10!, vertical: MySize.size5!),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(child: getMainText(text)),
-          const SizedBox(height: 50,),
-          getOnOffSwitch(),
-          const SizedBox(height: 50,),
+          Row(
+            children: [
+              parking("car1", true, car1,car1noti),
+              Spacer(),
+              parking("car2", false, car2,car2noti),
+            ],
+          ),
+          SizedBox(height: 100,),
+          Row(
+            children: [
+              parking("car3", true, car3,car3noti),
+              Spacer(),
+              parking("car4", false, car4,car4noti),
+            ],
+          ),
+
         ],
       ),
     );
   }
-  
-  Widget getMainText(String text) {
+
+  Widget parking(String car,bool left,bool visible,bool status)
+  {
     return Container(
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(MySize.size10!),
-        border: Border.all(color: Styles.primaryColor, width: 1),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 30
-        ),
-        overflow: TextOverflow.ellipsis,
+      width: 150,
+      height: 150,
+      child: Column(
+        children: [
+
+          Text(car,style: TextStyle(
+            fontSize: 25,
+          ),),
+          Visibility(
+              visible: visible,
+              child: Image.asset("assets/${left?"carleft.png":"carright.png"}" ,height: 70,)),
+          getOnOffSwitch(car,status)
+        ],
       ),
     );
   }
 
-  Widget getOnOffSwitch() {
+
+
+  Widget getOnOffSwitch(String car,bool status) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Switch(value: status, onChanged: (bool? newValue) {
           print("On Changed Called:${newValue}");
-          _deviceRef.update({"status" : (newValue ?? false) ? "on" : "off"});
+          status=!status;
+          setState(() {
+          });
+          _userref.update({car : (newValue ?? false) ? "on" : "off"});
         }),
-        SizedBox(width: MySize.size10!,),
-        Text(status ? "On" : "Off", style: const TextStyle(color: Colors.black),)
       ],
     );
   }

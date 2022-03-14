@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_keyboard/screens/authentication/login_screen.dart';
 import 'package:virtual_keyboard/screens/authentication/otp_screen.dart';
-import 'package:virtual_keyboard/screens/home_screen/create_post_screen.dart';
 import 'package:virtual_keyboard/screens/home_screen/main_page.dart';
 import 'package:virtual_keyboard/splash_screen.dart';
 import 'package:virtual_keyboard/utils/my_print.dart';
@@ -31,10 +30,6 @@ class NavigationController {
       }
       case MainPage.routeName : {
         widget = const MainPage();
-        break;
-      }
-      case CreatePostScreen.routeName : {
-        widget = const CreatePostScreen();
         break;
       }
       default : {
