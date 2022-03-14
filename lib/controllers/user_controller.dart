@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/controllers/firestore_controller.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
-import 'package:virtual_keyboard/models/user_model.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
+import 'package:smart_parking/controllers/firestore_controller.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
+import 'package:smart_parking/models/user_model.dart';
+import 'package:smart_parking/utils/my_print.dart';
 import 'package:provider/provider.dart';
 
 class UserController {

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:virtual_keyboard/models/user_model.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
+import 'package:smart_parking/models/user_model.dart';
+import 'package:smart_parking/utils/my_print.dart';
 
 class UserProvider extends ChangeNotifier {
   String userid = "";

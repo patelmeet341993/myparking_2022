@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/controllers/authentication_controller.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
-import 'package:virtual_keyboard/screens/common/components/MyCupertinoAlertDialogWidget.dart';
-import 'package:virtual_keyboard/screens/common/components/app_bar.dart';
-import 'package:virtual_keyboard/screens/common/components/modal_progress_hud.dart';
-import 'package:virtual_keyboard/utils/SizeConfig.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/controllers/authentication_controller.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
+import 'package:smart_parking/screens/common/components/MyCupertinoAlertDialogWidget.dart';
+import 'package:smart_parking/screens/common/components/app_bar.dart';
+import 'package:smart_parking/screens/common/components/modal_progress_hud.dart';
+import 'package:smart_parking/utils/SizeConfig.dart';
+import 'package:smart_parking/utils/my_print.dart';
+import 'package:smart_parking/utils/styles.dart';
 import 'package:provider/provider.dart';
 
 class UserProfileScreen extends StatefulWidget {

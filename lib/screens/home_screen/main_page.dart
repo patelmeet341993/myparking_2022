@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/controllers/providers/connection_provider.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
-import 'package:virtual_keyboard/screens/home_screen/home_screen.dart';
-import 'package:virtual_keyboard/screens/home_screen/user_profile_screen.dart';
-import 'package:virtual_keyboard/utils/SizeConfig.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/controllers/providers/connection_provider.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
+import 'package:smart_parking/screens/home_screen/home_screen.dart';
+import 'package:smart_parking/screens/home_screen/user_profile_screen.dart';
+import 'package:smart_parking/utils/SizeConfig.dart';
+import 'package:smart_parking/utils/my_print.dart';
+import 'package:smart_parking/utils/styles.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {

@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
-import 'package:virtual_keyboard/screens/authentication/login_screen.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
-import 'package:virtual_keyboard/utils/snakbar.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
+import 'package:smart_parking/screens/authentication/login_screen.dart';
+import 'package:smart_parking/utils/my_print.dart';
+import 'package:smart_parking/utils/snakbar.dart';
 import 'package:provider/provider.dart';
 
 //To Perform Authentication Operations

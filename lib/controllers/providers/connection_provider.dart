@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
+import 'package:smart_parking/utils/my_print.dart';
 
 class ConnectionProvider extends ChangeNotifier {
   bool isInternet = true;

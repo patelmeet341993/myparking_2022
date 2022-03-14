@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/utils/SizeConfig.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/utils/SizeConfig.dart';
+import 'package:smart_parking/utils/styles.dart';
 
 class MyAppBar extends StatefulWidget {
 

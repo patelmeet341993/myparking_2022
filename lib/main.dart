@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:virtual_keyboard/controllers/navigation_controller.dart';
-import 'package:virtual_keyboard/controllers/providers/connection_provider.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
+import 'package:smart_parking/controllers/navigation_controller.dart';
+import 'package:smart_parking/controllers/providers/connection_provider.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/screens/common/components/app_bar.dart';
-import 'package:virtual_keyboard/utils/SizeConfig.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/screens/common/components/app_bar.dart';
+import 'package:smart_parking/utils/SizeConfig.dart';
+import 'package:smart_parking/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Visibility(
               visible: visible,
               child: Image.asset("assets/${left?"carleft.png":"carright.png"}" ,height: 70,)),
-          getOnOffSwitch(car,status)
+          //getOnOffSwitch(car,status)
         ],
       ),
     );

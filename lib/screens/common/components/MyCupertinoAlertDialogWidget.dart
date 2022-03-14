@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/utils/styles.dart';
 
 class MyCupertinoAlertDialogWidget extends StatelessWidget {
   String title, description;

@@ -2,16 +2,16 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:virtual_keyboard/controllers/providers/connection_provider.dart';
-import 'package:virtual_keyboard/controllers/providers/user_provider.dart';
-import 'package:virtual_keyboard/controllers/user_controller.dart';
-import 'package:virtual_keyboard/screens/common/components/modal_progress_hud.dart';
-import 'package:virtual_keyboard/screens/common/components/pin_put.dart';
-import 'package:virtual_keyboard/screens/home_screen/main_page.dart';
-import 'package:virtual_keyboard/utils/SizeConfig.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
-import 'package:virtual_keyboard/utils/snakbar.dart';
-import 'package:virtual_keyboard/utils/styles.dart';
+import 'package:smart_parking/controllers/providers/connection_provider.dart';
+import 'package:smart_parking/controllers/providers/user_provider.dart';
+import 'package:smart_parking/controllers/user_controller.dart';
+import 'package:smart_parking/screens/common/components/modal_progress_hud.dart';
+import 'package:smart_parking/screens/common/components/pin_put.dart';
+import 'package:smart_parking/screens/home_screen/main_page.dart';
+import 'package:smart_parking/utils/SizeConfig.dart';
+import 'package:smart_parking/utils/my_print.dart';
+import 'package:smart_parking/utils/snakbar.dart';
+import 'package:smart_parking/utils/styles.dart';
 import 'package:provider/provider.dart';
 
 class OtpScreen extends StatefulWidget {

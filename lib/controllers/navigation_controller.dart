@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_keyboard/screens/authentication/login_screen.dart';
-import 'package:virtual_keyboard/screens/authentication/otp_screen.dart';
-import 'package:virtual_keyboard/screens/home_screen/main_page.dart';
-import 'package:virtual_keyboard/splash_screen.dart';
-import 'package:virtual_keyboard/utils/my_print.dart';
+import 'package:smart_parking/screens/authentication/login_screen.dart';
+import 'package:smart_parking/screens/authentication/otp_screen.dart';
+import 'package:smart_parking/screens/home_screen/main_page.dart';
+import 'package:smart_parking/splash_screen.dart';
+import 'package:smart_parking/utils/my_print.dart';
 
 class NavigationController {
   Route? onGeneratedRoutes(RouteSettings routeSettings) {
