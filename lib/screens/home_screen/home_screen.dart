@@ -120,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.symmetric(horizontal: MySize.size10!, vertical: MySize.size5!),
       child: Column(
          mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -153,9 +154,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Text(car,style: TextStyle(
             fontSize: 25,
           ),),
-          Visibility(
-              visible: visible,
-              child: Image.asset("assets/${left?"carleft.png":"carright.png"}" ,height: 70,)),
+          visible?Container(
+              color: Colors.grey,
+              child: Image.asset("assets/${left?"carleft.png":"carright.png"}" ,height: 70,)):Container(height: 70,color: Colors.grey,),
           //getOnOffSwitch(car,status)
         ],
       ),
