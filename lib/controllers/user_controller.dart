@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_parking/controllers/firestore_controller.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
@@ -10,13 +11,13 @@ class UserController {
   static UserController? _instance;
 
   factory UserController() {
-    if(_instance == null) {
-      _instance = UserController._();
-    }
+    _instance ??= UserController._();
     return _instance!;
   }
 
   UserController._();
+
+  User? firebaseUser;
 
   Future<bool> isUserExist(BuildContext context, String uid) async {
     if(uid.isEmpty) return false;

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_parking/controllers/user_controller.dart';
 import 'package:smart_parking/screens/common/components/app_bar.dart';
 import 'package:smart_parking/utils/SizeConfig.dart';
 import 'package:smart_parking/utils/styles.dart';
@@ -24,10 +26,32 @@ class _HomeScreenState extends State<HomeScreen> {
   bool car1=false,car2=false,car3=false,car4=false;
   bool car1noti=false,car2noti=false,car3noti=false,car4noti=false;
 
+  void setNotification()async{
+    if(car1noti)
+        await FirebaseMessaging.instance.subscribeToTopic('car1');
+    else
+      await FirebaseMessaging.instance.unsubscribeFromTopic('car1');
+
+    if(car2noti)
+      await FirebaseMessaging.instance.subscribeToTopic('car2');
+    else
+      await FirebaseMessaging.instance.unsubscribeFromTopic('car2');
+
+    if(car3noti)
+      await FirebaseMessaging.instance.subscribeToTopic('car3');
+    else
+      await FirebaseMessaging.instance.unsubscribeFromTopic('car3');
+
+    if(car4noti)
+      await FirebaseMessaging.instance.subscribeToTopic('car4');
+    else
+      await FirebaseMessaging.instance.unsubscribeFromTopic('car4');
+
+  }
 
   Future<void> initSync() async {
     _deviceRef = FirebaseDatabase.instance.ref('parking');
-    _userref = FirebaseDatabase.instance.ref('notification');
+    _userref = FirebaseDatabase.instance.ref(UserController().firebaseUser!.uid);
 
     _deviceSubscription = _deviceRef.onValue.listen((DatabaseEvent event) {
       print("Value:${event.snapshot.value}");
@@ -65,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
         car3noti=map["car3"].toString()=="on"?true:false;
         car4noti=map["car4"].toString()=="on"?true:false;
 
+        setNotification();
 
         if(pageMounted) { setState(() {}); }
         else {
@@ -157,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
           visible?Container(
               color: Colors.grey,
               child: Image.asset("assets/${left?"carleft.png":"carright.png"}" ,height: 70,)):Container(height: 70,color: Colors.grey,),
-          //getOnOffSwitch(car,status)
+          getOnOffSwitch(car,status)
         ],
       ),
     );

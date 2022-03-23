@@ -54,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
     UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
     userProvider.userid = user.uid;
     userProvider.firebaseUser = user;
+    UserController().firebaseUser = user;
 
     MyPrint.printOnConsole("Email:${user.email}");
     MyPrint.printOnConsole("Mobile:${user.phoneNumber}");
