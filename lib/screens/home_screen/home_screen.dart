@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_parking/configs/constants.dart';
 import 'package:smart_parking/controllers/user_controller.dart';
 import 'package:smart_parking/screens/common/components/app_bar.dart';
 import 'package:smart_parking/utils/SizeConfig.dart';
@@ -27,25 +28,33 @@ class _HomeScreenState extends State<HomeScreen> {
   bool car1noti=false,car2noti=false,car3noti=false,car4noti=false;
 
   void setNotification()async{
-    if(car1noti)
-        await FirebaseMessaging.instance.subscribeToTopic('car1');
-    else
-      await FirebaseMessaging.instance.unsubscribeFromTopic('car1');
+    if(car1noti) {
+      await FirebaseMessaging.instance.subscribeToTopic(CarKeys.car1);
+    }
+    else {
+      await FirebaseMessaging.instance.unsubscribeFromTopic(CarKeys.car1);
+    }
 
-    if(car2noti)
-      await FirebaseMessaging.instance.subscribeToTopic('car2');
-    else
-      await FirebaseMessaging.instance.unsubscribeFromTopic('car2');
+    if(car2noti) {
+      await FirebaseMessaging.instance.subscribeToTopic(CarKeys.car2);
+    }
+    else {
+      await FirebaseMessaging.instance.unsubscribeFromTopic(CarKeys.car2);
+    }
 
-    if(car3noti)
-      await FirebaseMessaging.instance.subscribeToTopic('car3');
-    else
-      await FirebaseMessaging.instance.unsubscribeFromTopic('car3');
+    if(car3noti) {
+      await FirebaseMessaging.instance.subscribeToTopic(CarKeys.car3);
+    }
+    else {
+      await FirebaseMessaging.instance.unsubscribeFromTopic(CarKeys.car3);
+    }
 
-    if(car4noti)
-      await FirebaseMessaging.instance.subscribeToTopic('car4');
-    else
-      await FirebaseMessaging.instance.unsubscribeFromTopic('car4');
+    if(car4noti) {
+      await FirebaseMessaging.instance.subscribeToTopic(CarKeys.car4);
+    }
+    else {
+      await FirebaseMessaging.instance.unsubscribeFromTopic(CarKeys.car4);
+    }
 
   }
 
@@ -59,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Map<String, dynamic> map = Map.castFrom(event.snapshot.value as Map);
         text = map.toString();
 
-        car1=map["car1"].toString()=="on"?true:false;
-        car2=map["car2"].toString()=="on"?true:false;
-        car3=map["car3"].toString()=="on"?true:false;
-        car4=map["car4"].toString()=="on"?true:false;
+        car1=map[CarKeys.car1].toString()=="on"?true:false;
+        car2=map[CarKeys.car2].toString()=="on"?true:false;
+        car3=map[CarKeys.car3].toString()=="on"?true:false;
+        car4=map[CarKeys.car4].toString()=="on"?true:false;
 
 
         if(pageMounted) {setState(() {});}
@@ -84,10 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
         Map<String, dynamic> map = Map.castFrom(event.snapshot.value as Map);
         text = map.toString();
 
-        car1noti=map["car1"].toString()=="on"?true:false;
-        car2noti=map["car2"].toString()=="on"?true:false;
-        car3noti=map["car3"].toString()=="on"?true:false;
-        car4noti=map["car4"].toString()=="on"?true:false;
+        car1noti=map[CarKeys.car1].toString()=="on"?true:false;
+        car2noti=map[CarKeys.car2].toString()=="on"?true:false;
+        car3noti=map[CarKeys.car3].toString()=="on"?true:false;
+        car4noti=map[CarKeys.car4].toString()=="on"?true:false;
 
         setNotification();
 
@@ -149,17 +158,17 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Row(
             children: [
-              parking("car1", true, car1,car1noti),
+              parking("Car1", CarKeys.car1, true, car1,car1noti),
               Spacer(),
-              parking("car2", false, car2,car2noti),
+              parking("Car2", CarKeys.car2, false, car2,car2noti),
             ],
           ),
           SizedBox(height: 100,),
           Row(
             children: [
-              parking("car3", true, car3,car3noti),
+              parking("Car3", CarKeys.car3, true, car3,car3noti),
               Spacer(),
-              parking("car4", false, car4,car4noti),
+              parking("Car4", CarKeys.car4, false, car4,car4noti),
             ],
           ),
 
@@ -168,15 +177,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget parking(String car,bool left,bool visible,bool status)
-  {
+  Widget parking(String title, String car,bool left,bool visible,bool status) {
     return Container(
       width: 150,
       height: 150,
       child: Column(
         children: [
-
-          Text(car,style: TextStyle(
+          Text(title,style: TextStyle(
             fontSize: 25,
           ),),
           visible?Container(
@@ -198,8 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Switch(value: status, onChanged: (bool? newValue) {
           print("On Changed Called:${newValue}");
           status=!status;
-          setState(() {
-          });
+          setState(() {});
           _userref.update({car : (newValue ?? false) ? "on" : "off"});
         }),
       ],
