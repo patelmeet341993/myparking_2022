@@ -310,8 +310,9 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.only(top: MySize.size16!, bottom: MySize.size16!),
         onPressed: sendOtp,
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           alignment: Alignment.center,
+          clipBehavior: Clip.none,
           children: <Widget>[
             const Align(
               alignment: Alignment.center,
