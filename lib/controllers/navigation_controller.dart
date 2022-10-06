@@ -6,6 +6,8 @@ import 'package:smart_parking/screens/home_screen/main_page.dart';
 import 'package:smart_parking/splash_screen.dart';
 import 'package:smart_parking/utils/my_print.dart';
 
+import '../screens/home_screen/home_screen_temp.dart';
+
 class NavigationController {
   Route? onGeneratedRoutes(RouteSettings routeSettings) {
     MyPrint.printOnConsole("OnGeneratedRoutes Called for ${routeSettings.name} with arguments:${routeSettings.arguments}");
@@ -30,6 +32,7 @@ class NavigationController {
       }
       case MainPage.routeName : {
         widget = const MainPage();
+        // widget = const HomeScreenTemp();
         break;
       }
       default : {

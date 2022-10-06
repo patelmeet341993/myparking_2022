@@ -19,6 +19,8 @@ class UserController {
 
   User? firebaseUser;
 
+  bool isFirstProject = true;
+
   Future<bool> isUserExist(BuildContext context, String uid) async {
     if(uid.isEmpty) return false;
 
