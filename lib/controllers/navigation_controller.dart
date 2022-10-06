@@ -31,8 +31,8 @@ class NavigationController {
         break;
       }
       case MainPage.routeName : {
-        widget = const MainPage();
-        // widget = const HomeScreenTemp();
+        // widget = const MainPage();
+        widget = const HomeScreenTemp();
         break;
       }
       default : {
