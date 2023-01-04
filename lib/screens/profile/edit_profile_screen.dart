@@ -9,6 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_parking/configs/constants.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:smart_parking/models/user_model.dart';
 import 'package:smart_parking/utils/styles.dart';
@@ -32,6 +33,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController nameController, mobileController, emailController;
+  bool isMobileFieldEnabled = true, isEmailFieldEnabled = true;
 
   final picker = ImagePicker();
   File? profileImageFile;
@@ -47,6 +49,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       mobileController.text = userModel.mobile;
       emailController.text = userModel.email;
       profileImageUrl = userModel.image;
+
+      isMobileFieldEnabled = userModel.loginType != LoginTypes.mobile;
+      isEmailFieldEnabled = userModel.loginType != LoginTypes.google;
     }
   }
 
@@ -183,19 +188,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             children: [
               MyAppBar(title: "Edit Profile", color: Colors.white, backbtnVisible: false,),
               Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: MySize.size10!),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        getImageWidget(),
-                        getNameTextField(),
-                        getMobileTextField(),
-                        getEmailTextField(),
-                        getEditProfileButton(),
-                      ],
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: MySize.size10!),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          getImageWidget(),
+                          getNameTextField(),
+                          getMobileTextField(),
+                          getEmailTextField(),
+                          getEditProfileButton(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -356,6 +363,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: MySize.size10!, horizontal: MySize.size16!),
       child: TextFormField(
+        enabled: isMobileFieldEnabled,
         controller: mobileController,
         validator: (val) {
           if(val?.isEmpty ?? true) {
@@ -365,6 +373,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             return null;
           }
         },
+        style: TextStyle(
+          color: isMobileFieldEnabled ? null : Colors.grey,
+        ),
         decoration: getTextFieldInputDecoration(hintText: "Mobile", fillColor: Colors.white),
         keyboardType: const TextInputType.numberWithOptions(signed: false, decimal: true),
         inputFormatters: [
@@ -379,7 +390,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: MySize.size10!, horizontal: MySize.size16!),
       child: TextField(
+        enabled: isEmailFieldEnabled,
         controller: emailController,
+        style: TextStyle(
+          color: isEmailFieldEnabled ? null : Colors.grey,
+        ),
         decoration: getTextFieldInputDecoration(hintText: "Email", fillColor: Colors.white),
         inputFormatters: [
           LengthLimitingTextInputFormatter(55),
