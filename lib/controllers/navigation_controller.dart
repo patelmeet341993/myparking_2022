@@ -7,6 +7,7 @@ import 'package:smart_parking/splash_screen.dart';
 import 'package:smart_parking/utils/my_print.dart';
 
 import '../screens/home_screen/home_screen_temp.dart';
+import '../screens/profile/edit_profile_screen.dart';
 
 class NavigationController {
   Route? onGeneratedRoutes(RouteSettings routeSettings) {
@@ -15,6 +16,10 @@ class NavigationController {
     Widget? widget;
 
     switch(routeSettings.name) {
+      case "/" : {
+        widget = const SplashScreen();
+        break;
+      }
       case SplashScreen.routeName : {
         widget = const SplashScreen();
         break;
@@ -31,15 +36,20 @@ class NavigationController {
         break;
       }
       case MainPage.routeName : {
-        // widget = const MainPage();
-        widget = const HomeScreenTemp();
+        widget = const MainPage();
+        // widget = const HomeScreenTemp();
         break;
       }
-      default : {
-        widget = const SplashScreen();
+      case EditProfileScreen.routeName : {
+        widget = const EditProfileScreen();
+        break;
       }
     }
 
-    if(widget != null)return MaterialPageRoute(builder: (_) => widget!);
+    if(widget != null) {
+      return MaterialPageRoute(builder: (_) => widget!);
+    }
+
+    return null;
   }
 }

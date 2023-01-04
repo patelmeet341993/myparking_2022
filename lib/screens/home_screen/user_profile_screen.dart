@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:smart_parking/controllers/authentication_controller.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:smart_parking/screens/common/components/MyCupertinoAlertDialogWidget.dart';
 import 'package:smart_parking/screens/common/components/app_bar.dart';
 import 'package:smart_parking/screens/common/components/modal_progress_hud.dart';
+import 'package:smart_parking/screens/profile/edit_profile_screen.dart';
 import 'package:smart_parking/utils/SizeConfig.dart';
 import 'package:smart_parking/utils/my_print.dart';
 import 'package:smart_parking/utils/styles.dart';
@@ -54,7 +56,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
-        backgroundColor: Styles.background,
         body: Column(
           children: [
             MyAppBar(title: "User Profile", color: Colors.white, backbtnVisible: false,),
@@ -90,37 +91,50 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   Widget getProfileDetails() {
-    UserProvider userProvider = Provider.of<UserProvider>(context,);
-    return Container(
-      margin: EdgeInsets.only(bottom: MySize.getScaledSizeHeight(250)),
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(bottom: MySize.size8!),
-            width: MySize.getScaledSizeHeight(120),
-            height: MySize.getScaledSizeHeight(120),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(300),
-              child: (userProvider.userModel?.image.isNotEmpty ?? false)
-                  ? CachedNetworkImage(imageUrl: userProvider.userModel!.image, fit: BoxFit.fill,)
-                  : Image.asset("assets/male profile vector.png", fit: BoxFit.fill,),
-            ),
+    return Consumer<UserProvider>(
+      builder: (BuildContext context, UserProvider userProvider, Widget? child) {
+        return Container(
+          margin: EdgeInsets.only(bottom: MySize.getScaledSizeHeight(250)),
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(bottom: MySize.size8!),
+                width: MySize.getScaledSizeHeight(120),
+                height: MySize.getScaledSizeHeight(120),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(300),
+                  child: (userProvider.userModel?.image.isNotEmpty ?? false)
+                      ? CachedNetworkImage(
+                          imageUrl: userProvider.userModel!.image,
+                          fit: BoxFit.fill,
+                          placeholder: (_, __) => const SpinKitFadingCircle(color: Styles.primaryColor,),
+                        )
+                      : Image.asset("assets/male profile vector.png", fit: BoxFit.fill,),
+                ),
+              ),
+              Text(userProvider.userModel?.name ?? "", style: const TextStyle(color: Colors.black),),
+              Visibility(
+                visible: (userProvider.userModel?.email ?? "").isNotEmpty,
+                child: Text(userProvider.userModel?.email ?? "", style: const TextStyle(color: Colors.black),),
+              ),
+              Visibility(
+                visible: (userProvider.userModel?.mobile ?? "").isNotEmpty,
+                child: Text(userProvider.userModel?.mobile ?? ""),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, EditProfileScreen.routeName);
+                },
+                child: const Text("Edit Profile"),
+              )
+            ],
           ),
-          Text(userProvider.userModel?.name ?? "", style: const TextStyle(color: Colors.black),),
-          Visibility(
-            visible: (userProvider.userModel?.email ?? "").isNotEmpty,
-            child: Text(userProvider.userModel?.email ?? "", style: const TextStyle(color: Colors.black),),
-          ),
-          Visibility(
-            visible: (userProvider.userModel?.mobile ?? "").isNotEmpty,
-            child: Text(userProvider.userModel?.mobile ?? ""),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

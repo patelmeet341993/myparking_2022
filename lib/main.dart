@@ -6,6 +6,7 @@ import 'package:smart_parking/controllers/navigation_controller.dart';
 import 'package:smart_parking/controllers/providers/connection_provider.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_parking/utils/styles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +66,16 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Styles.primaryColor,
+        scaffoldBackgroundColor: Styles.background,
+        colorScheme: const ColorScheme.light(
+          brightness: Brightness.light,
+          primary: Styles.primaryColor,
+        ),
+      ),
       onGenerateRoute: NavigationController().onGeneratedRoutes,
     );
   }
