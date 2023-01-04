@@ -1,5 +1,3 @@
-import 'package:smart_parking/controllers/user_controller.dart';
-
 class CarKeys {
   // static const String car1 = "car1";
   // static const String car2 = "car2";
@@ -10,4 +8,9 @@ class CarKeys {
   static const String car2 = "ccar2";
   static const String car3 = "ccar3";
   static const String car4 = "ccar4";
+}
+
+class LoginTypes {
+  static const String google = "Google";
+  static const String mobile = "Mobile";
 }
