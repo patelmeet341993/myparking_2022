@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_parking/controllers/providers/connection_provider.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:smart_parking/screens/home_screen/home_screen.dart';
 import 'package:smart_parking/screens/home_screen/user_profile_screen.dart';
@@ -73,7 +72,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     _tabController.addListener(_handleTabSelection);
     _tabController.animation!.addListener(_handleTabSelectionInAnimation);
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
       userProvider.setScreen(0);
     });
@@ -124,45 +123,43 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   }
 
   Widget getBottomBar(UserProvider userProvider) {
-    return Container(
-      child: BottomAppBar(
-        color: Colors.transparent.withOpacity(0),
-        shape: const CircularNotchedRectangle(),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        notchMargin: 5,
-        child: Container(
-          height: MySize.size60,
-          decoration: const BoxDecoration(
-            color: Styles.bottomAppbarColor,
+    return BottomAppBar(
+      color: Colors.transparent.withOpacity(0),
+      shape: const CircularNotchedRectangle(),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      notchMargin: 5,
+      child: Container(
+        height: MySize.size60,
+        decoration: const BoxDecoration(
+          color: Styles.bottomAppbarColor,
+        ),
+        child: TabBar(
+          onTap: (int val) {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          controller: _tabController,
+          indicator: const BoxDecoration(),
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorColor: Styles.primaryColor,
+          labelColor: Styles.primaryColor,
+          unselectedLabelColor: Styles.onBackground.withOpacity(0.4),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: MySize.getScaledSizeHeight(11),
           ),
-          child: TabBar(
-            onTap: (int val) {
-              FocusScope.of(context).requestFocus(new FocusNode());
-            },
-            controller: _tabController,
-            indicator: const BoxDecoration(),
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Styles.primaryColor,
-            labelColor: Styles.primaryColor,
-            unselectedLabelColor: Styles.onBackground.withOpacity(0.4),
-            labelPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: MySize.getScaledSizeHeight(11),
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.home, size: MySize.size28,),
+              iconMargin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              text: "Home",
             ),
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.home, size: MySize.size28,),
-                iconMargin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                text: "Home",
-              ),
-              Tab(
-                icon: Icon(Icons.person, size: MySize.size28,),
-                iconMargin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                text: "Profile",
-              ),
-            ],
-          ),
+            Tab(
+              icon: Icon(Icons.person, size: MySize.size28,),
+              iconMargin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+              text: "Profile",
+            ),
+          ],
         ),
       ),
     );

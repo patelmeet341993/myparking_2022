@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isFirst = true, isLoading = false;
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController? mobileController;
 
   void signInWithGoogle() async {
@@ -60,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
     MyPrint.printOnConsole("Mobile:${user.phoneNumber}");
 
     bool isExist = await UserController().isUserExist(context, userProvider.userid);
+    MyPrint.printOnConsole("isExist:$isExist");
 
     setState(() {
       isLoading = false;
