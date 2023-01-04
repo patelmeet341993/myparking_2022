@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  String id = "", name = "", image = "", mobile = "", email = "";
+  String id = "", name = "", image = "", mobile = "", email = "", loginType = "";
   Timestamp? createdTime;
-  List<String> myLikedPosts = [];
 
   UserModel();
 
@@ -13,14 +12,8 @@ class UserModel {
     image = map['image']?.toString() ?? "";
     mobile = map['mobile']?.toString() ?? "";
     email = map['email']?.toString() ?? "";
+    loginType = map['loginType']?.toString() ?? "";
     createdTime = map['createdTime'];
-
-    try {
-      List<String> list = List.castFrom(map['myLikedPosts'] ?? []);
-      myLikedPosts = list;
-    }
-    catch(e) {}
-
   }
 
   void updateFromMap(Map<String, dynamic> map) {
@@ -29,14 +22,8 @@ class UserModel {
     image = map['image']?.toString() ?? "";
     mobile = map['mobile']?.toString() ?? "";
     email = map['email']?.toString() ?? "";
+    loginType = map['loginType']?.toString() ?? "";
     createdTime = map['createdTime'];
-
-    try {
-      List<String> list = List.castFrom(map['myLikedPosts'] ?? []);
-      myLikedPosts = list;
-    }
-    catch(e) {}
-
   }
 
   Map<String, dynamic> tomap() {
@@ -46,13 +33,13 @@ class UserModel {
       "image" : image,
       "mobile" : mobile,
       "email" : email,
+      "loginType" : loginType,
       "createdTime" : createdTime,
-      "myLikedPosts" : myLikedPosts,
     };
   }
 
   @override
   String toString() {
-    return "id:${id}, name:$name, image:$image, mobile:$mobile, email:$email, createdTime:$createdTime, myLikedPosts:$myLikedPosts";
+    return "id:${id}, name:$name, image:$image, mobile:$mobile, email:$email, loginType:$loginType, createdTime:$createdTime";
   }
 }
