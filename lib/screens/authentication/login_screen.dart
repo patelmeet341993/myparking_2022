@@ -15,6 +15,8 @@ import 'package:smart_parking/utils/snakbar.dart';
 import 'package:smart_parking/utils/styles.dart';
 import 'package:provider/provider.dart';
 
+import '../home_screen/location_selection_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   static const String routeName = "/LoginScreen";
   const LoginScreen({Key? key}) : super(key: key);
@@ -67,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     print("User Exist");
-    Navigator.pushNamedAndRemoveUntil(context, MainPage.routeName, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, LocationSelectionScreen.routeName, (route) => false);
   }
 
   void sendOtp() {

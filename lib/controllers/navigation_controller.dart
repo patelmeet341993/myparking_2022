@@ -6,7 +6,7 @@ import 'package:smart_parking/screens/home_screen/main_page.dart';
 import 'package:smart_parking/splash_screen.dart';
 import 'package:smart_parking/utils/my_print.dart';
 
-import '../screens/home_screen/home_screen_temp.dart';
+import '../screens/home_screen/location_selection_screen.dart';
 import '../screens/profile/edit_profile_screen.dart';
 
 class NavigationController {
@@ -33,6 +33,11 @@ class NavigationController {
         if (mobile.isNotEmpty) {
           widget = OtpScreen(mobile: mobile,);
         }
+        break;
+      }
+      case LocationSelectionScreen.routeName : {
+        widget = const LocationSelectionScreen();
+        // widget = const HomeScreenTemp();
         break;
       }
       case MainPage.routeName : {

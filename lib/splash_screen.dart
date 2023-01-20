@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_parking/controllers/authentication_controller.dart';
 import 'package:smart_parking/controllers/providers/connection_provider.dart';
 import 'package:smart_parking/controllers/providers/user_provider.dart';
 import 'package:smart_parking/controllers/user_controller.dart';
 import 'package:smart_parking/screens/authentication/login_screen.dart';
-import 'package:smart_parking/screens/home_screen/main_page.dart';
 import 'package:smart_parking/utils/SizeConfig.dart';
 import 'package:smart_parking/utils/my_print.dart';
 import 'package:smart_parking/utils/styles.dart';
-import 'package:provider/provider.dart';
+
+import 'screens/home_screen/location_selection_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/SplashScreen";
@@ -46,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
       bool isExist = await UserController().isUserExist(context, userProvider.userid);
       MyPrint.printOnConsole("IsUserExist:${isExist}");
 
-      Navigator.pushNamedAndRemoveUntil(context, MainPage.routeName, (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, LocationSelectionScreen.routeName, (route) => false);
     }
     else {
       Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (_) => false);
